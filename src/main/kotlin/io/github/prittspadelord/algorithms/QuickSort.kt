@@ -4,8 +4,7 @@ import kotlin.math.floor
 
 class QuickSort<T: Comparable<T>> {
 
-    // identify the partition
-    fun partition(array: Array<T>, low: Int, high: Int): Int {
+    private fun partition(array: Array<T>, low: Int, high: Int): Int {
         assert(high >= low)
 
         val firstIndex = low
@@ -14,6 +13,7 @@ class QuickSort<T: Comparable<T>> {
 
         var pivot = lastIndex
 
+        //median of three
         if(((array[firstIndex] < array[middleIndex]) && (array[lastIndex] > array[middleIndex])) || ((array[firstIndex] > array[middleIndex]) && (array[lastIndex] < array[middleIndex]))) {
             pivot = middleIndex
         }
@@ -22,8 +22,6 @@ class QuickSort<T: Comparable<T>> {
         }
 
         val pivotValue = array[pivot]
-
-        //now we partition it
 
         //pivot has been swapped to the first
         val temp = array[pivot]
@@ -59,6 +57,18 @@ class QuickSort<T: Comparable<T>> {
         array[low] = array[j]
         array[j] = temp2
 
-        return pivot
+        return j
+    }
+
+    private fun quicksort(array: Array<T>, start: Int, end: Int) {
+        if(start < end) {
+            val partitionIndex = this.partition(array, start, end)
+            this.quicksort(array, start, partitionIndex - 1)
+            this.quicksort(array, partitionIndex + 1, end)
+        }
+    }
+
+    fun sort(array: Array<T>) {
+        this.quicksort(array, 0, array.size - 1)
     }
 }
