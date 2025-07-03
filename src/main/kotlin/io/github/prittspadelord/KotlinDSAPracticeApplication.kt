@@ -1,17 +1,31 @@
 package io.github.prittspadelord
 
+import io.github.prittspadelord.algorithms.MergeSortLinkedList
 import io.github.prittspadelord.algorithms.QuickSort
 
 fun main() {
-    val quicksort = QuickSort<Int>()
+    val head = Node(0)
+    val one = Node(1)
+    val two = Node(2)
+    val three = Node(3)
+    val four = Node(4)
+    val five = Node(5)
+    val six = Node(6)
 
-    var array: Array<Int> = arrayOf(6,5,4,3,2,1)
+    six.setNext(five)
+    five.setNext(four)
+    four.setNext(three)
+    three.setNext(two)
+    two.setNext(one)
+    head.setNext(six)
 
-//    println("Partition index is ${quicksort.partition(array, 0, array.size-1)}")
-//
-//    println("Modified array is ${array.joinToString(",")}")
+    println(head)
 
-    quicksort.sort(array)
+    val mergeSortLinkedList = MergeSortLinkedList<Int>()
 
-    println(array.joinToString(","))
+    val resultPair = mergeSortLinkedList.split(head)
+
+    println(resultPair.first)
+    println(resultPair.second)
+    println(head)
 }
